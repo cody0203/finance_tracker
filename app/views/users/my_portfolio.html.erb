@@ -1,0 +1,18 @@
+<h1>My Portfolio</h1>
+
+<div class="mt-5">
+    <h3>Search stocks</h3>
+    <div class="row">
+        <div class="col-10">
+            <%= form_tag search_stock_path, remote: true, method: :get  do %>
+            <div class="input-group mb-3">
+                <%= text_field_tag :stock, params[:stock], class: "form-control", placeholder: "Stock ticker symbol", 'aria-label': "Stock ticker symbol", 'aria-describedby': "button-addon2" %>
+                <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div id="results"></div>
+<%= render "users/result" %>
