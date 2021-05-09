@@ -1,0 +1,19 @@
+<%= render "layouts/messages" %>
+
+<% if @stock %> <div class="row">
+    <div class="col-7">
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">
+                    Symbol: <%= @stock.ticker %>
+                </h5>
+            </div>
+            <div class="card-body">
+                <b><%= @stock.name %></b>
+                <p class="card-text"><%= @stock.last_price %></p>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
