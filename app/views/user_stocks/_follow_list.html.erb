@@ -21,7 +21,10 @@
                         </td>
                         <td> <%= stock.last_price %>
                         </td>
-                        <td>placeholder</td>
+                        <td>
+                            <%= link_to "Unfollow", user_stock_path(stock), method: :delete, data: {confirm: 'Are your sure?'},
+                                                        class: "btn btn-danger" %>
+                        </td>
                     </tr>
                     <% end %>
                 </tbody>
