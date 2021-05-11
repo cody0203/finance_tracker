@@ -4,10 +4,22 @@
     <div class="col-7">
 
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title">
                     Symbol: <%= @stock.ticker %>
                 </h5>
+                <% if current_user.can_follow_stock?(@stock.ticker) %>
+                <%= link_to "Follow", user_stocks_path(user: current_user, ticker: @stock.ticker, name: @stock.name, last_price: @stock.last_price),
+                                      class: "btn btn-success", method: :post %>
+                <% else %>
+                <span class="badge bg-secondary">
+                    <% if !current_user.under_stock_limit? %>
+                    Limit follow reached
+                    <% else %>
+                    Already Followed
+                    <% end%>
+                </span>
+                <% end %>
             </div>
             <div class="card-body">
                 <b><%= @stock.name %></b>
