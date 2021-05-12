@@ -1,0 +1,41 @@
+<h1>My Friends</h1>
+
+<div class="mt-5">
+    <% if !@friend_list.blank? %>
+    <div class="row">
+        <div class="col-10">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @friend_list.each do |friend| %>
+                        <tr>
+                            <th scope="row">
+                                <%= friend.email %>
+                            </th>
+                            <td>
+                                <%= friend.first_name ? friend.first_name : "N/A" %>
+                            </td>
+                            <td> <%= friend.last_name ? friend.last_name : "N/A" %>
+                            </td>
+                            <td>
+                                <%= link_to "Unfollow", friendship_path(friend), method: :delete, data: {confirm: 'Are your sure?'},
+                                                        class: "btn btn-danger" %>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <%end %>
+</div>
