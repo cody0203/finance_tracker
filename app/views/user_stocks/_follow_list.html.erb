@@ -22,8 +22,24 @@
                         <td> <%= stock.last_price %>
                         </td>
                         <td>
+                            <% if current_user == @user %>
                             <%= link_to "Unfollow", user_stock_path(stock), method: :delete, data: {confirm: 'Are your sure?'},
                                                         class: "btn btn-danger" %>
+                            <% else %>
+                            <% if current_user.can_follow_stock?(stock.ticker) %>
+                            <%= link_to "Follow", user_stocks_path(user: current_user, ticker: stock.ticker, name: stock.name, last_price: stock.last_price),
+                                            class: "btn btn-success", method: :post %>
+                            <% else %>
+                            <span class="badge bg-secondary">
+                                <% if !current_user.under_stock_limit? %>
+                                Limit follow reached
+                                <% else %>
+                                Already Followed
+                                <% end%>
+                            </span>
+                            <% end %>
+
+                            <% end%>
                         </td>
                     </tr>
                     <% end %>

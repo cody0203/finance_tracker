@@ -1,0 +1,28 @@
+<%= render "layouts/messages" %>
+
+<% @friends.each do |friend| %>
+<div class="row">
+    <div class="col-7">
+
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title">
+                    <%= friend.full_name %>
+                </h5>
+                <% if current_user.id != friend.id %>
+                <% if !current_user.friend_already_followed?(friend.id) %>
+                <%= link_to "Follow", friendships_path(friend: friend),
+                                      class: "btn btn-success", method: :post %>
+                <% else %>
+                <span class="badge bg-secondary">Already followed</span>
+                <% end %>
+                <% end %>
+
+            </div>
+            <div class="card-body">
+                <b><%= friend.email %></b>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
